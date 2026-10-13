@@ -23,6 +23,7 @@ import { useUISettings } from 'dashboard/composables/useUISettings';
 import { useAlert } from 'dashboard/composables';
 import { useBulkActions } from 'dashboard/composables/chatlist/useBulkActions';
 import { useFilter } from 'shared/composables/useFilter';
+import { UNASSIGNED_ID } from 'dashboard/constants/filters';
 import { useTrack } from 'dashboard/composables';
 import { useI18n } from 'vue-i18n';
 import {
@@ -476,7 +477,10 @@ function setParamsForEditFolderModal() {
   // For custom attributes we get only attribute key.
   // So we are mapping it to find the input type of the attribute to show in the edit folder modal.
   return {
-    agents: agentList.value,
+    agents: [
+      { id: UNASSIGNED_ID, name: t('FILTER.UNASSIGNED') },
+      ...agentList.value,
+    ],
     teams: teamsList.value,
     inboxes: inboxesList.value,
     labels: labels.value,
